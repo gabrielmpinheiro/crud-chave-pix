@@ -1,8 +1,11 @@
 spring:
-  jpa:
-   hibernate:
-     ddl-auto: update
-   datasource:
+  datasource:
     url: jdbc:mysql://localhost:3306/crudpix
-    username: crudpix
+    username: admpix
     password: 12qwaszx
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
