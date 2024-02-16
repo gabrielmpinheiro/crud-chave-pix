@@ -1,8 +1,9 @@
 package br.tqigmpinheiro.com.crudpix.entities
 
 import jakarta.persistence.*
+import org.hibernate.Hibernate
 
-@Entity(name = "Customers")
+@Entity(name = "customers")
 data class CustomersEntity(
     @Id
     val id: Int,
