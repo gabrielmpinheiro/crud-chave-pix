@@ -34,7 +34,7 @@ class CustomerController(
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody customer: PostCustomerRequest) {
-        return customerService.create(customer.toCustomerEntity())
+        customerService.create(customer.toCustomerEntity())
     }
 
     @PutMapping("/{id}")
@@ -43,7 +43,7 @@ class CustomerController(
     }
 
     @DeleteMapping("/{id}")
-    fun delete(@RequestParam id: Int)  {
+    fun delete(@PathVariable id: Int)  {
         customerService.delete(id)
     }
 }
