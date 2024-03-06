@@ -1,33 +1,40 @@
 package br.tqigmpinheiro.com.crudpix.controller
 
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import br.tqigmpinheiro.com.crudpix.controller.request.PostAccountRequest
+import br.tqigmpinheiro.com.crudpix.controller.request.PutAccountRequest
+import br.tqigmpinheiro.com.crudpix.entities.AccountEntity
+import br.tqigmpinheiro.com.crudpix.extension.toAccountEntity
+import br.tqigmpinheiro.com.crudpix.service.AccountService
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("account")
-class AccountController {
+class AccountController(
+    var accountService: AccountService
+) {
 
     @GetMapping
-    fun getAll() {
-
+    fun getAll(): List<AccountEntity> {
+        return accountService.getAll()
     }
 
     @PostMapping
-    fun insert() {
-
+    @ResponseStatus(HttpStatus.CREATED)
+    fun create(@RequestBody account: PostAccountRequest) {
+        //Account vem pelo corpo da requisição, aqui ele irá ser preenchido por um PostAccountRequest, que é
+        //a forma como os dados serão recebidos.
+        accountService.create(account.toAccountEntity())
     }
 
-    @PutMapping
-    fun update() {
-
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: Int, @RequestBody account: PutAccountRequest) {
+        //Criamos o Put Account Request
+        accountService.update(account.toAccountEntity(id))
     }
 
-    @DeleteMapping
-    fun delete(){
-
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Int){
+        return accountService.delete(id)
     }
 }

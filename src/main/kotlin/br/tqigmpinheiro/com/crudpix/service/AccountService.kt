@@ -29,4 +29,12 @@ class AccountService(
     fun getAccount(id: Int): AccountEntity {
         return accountRepository.findById(id).orElseThrow()
     }
+
+    fun delete(id: Int) {
+        if(!accountRepository.existsById(id)) {
+            throw Exception()
+        }
+
+        accountRepository.deleteById(id)
+    }
 }

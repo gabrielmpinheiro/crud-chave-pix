@@ -12,7 +12,7 @@ data class AccountEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
+    val id: Int? = null,
 
     @Column
     var banco: String,
